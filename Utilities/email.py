@@ -11,11 +11,11 @@ def send_acception_email(receiver, bot_name, load):
     email_html = f"""
     <html>
         <body>
-            <p><strong>Load Accepted:</strong> 
+            <p><strong>Load Bid:</strong> 
                 <a href='https://market-atl.carrierpoint.com/market/jsp/CPShipmentDetail.jsp?shipmentId={load["id"]}'>
                     {load["id"]}
                 </a> 
-                - {load["origin_city"]}, {load["origin_state"]} → {load["destn_city"]}, {load["destn_state"]}
+                - {load["origin_city"]}, {load["origin_state"]} → {load["dest_city"]}, {load["dest_state"]}
             </p>
 
             <p><strong>Shipper:</strong> {load["shipper"]}</p>
