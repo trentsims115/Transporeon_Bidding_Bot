@@ -402,7 +402,7 @@ def bid_load(driver, load, rown, amount):
     from selenium.webdriver.common.keys import Keys
     from Utilities.countdown import countdown
     from Utilities import storage
-    from Utilities.email import send_error_email
+    from Utilities.email import send_error_email, send_acception_email
     import traceback
     from Utilities.utils import save_screenshot
     if storage.config["bidding"] == 0:
@@ -429,6 +429,7 @@ def bid_load(driver, load, rown, amount):
         send_error_email(['it-dev@paulinc.com'], "Transporeon", error_message)
         print("Could not click on submit counteroffer")
     print('=============Bidding=============')
+    send_acception_email(['it-dev@paulinc.com'], "Transporeon", load)
     storage.save_load_to_db(load)
     storage.load_data()
     return True

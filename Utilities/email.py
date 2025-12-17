@@ -2,6 +2,47 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+def send_acception_email(receiver, bot_name, load):
+    sender = f'{bot_name}_bot@paulinc.com'
+
+    bid_amount = load.get("amount", "N/A")
+    reason = load.get("reason", "N/A")
+
+    email_html = f"""
+    <html>
+        <body>
+            <p><strong>Load Accepted:</strong> 
+                <a href='https://market-atl.carrierpoint.com/market/jsp/CPShipmentDetail.jsp?shipmentId={load["id"]}'>
+                    {load["id"]}
+                </a> 
+                - {load["origin_city"]}, {load["origin_state"]} → {load["destn_city"]}, {load["destn_state"]}
+            </p>
+
+            <p><strong>Shipper:</strong> {load["shipper"]}</p>
+            <p><strong>Pickup Date:</strong> {load["pickup_date"]}</p>
+
+            <p><strong>Bid Placed:</strong> ${bid_amount}</p>
+            <p><strong>Reason:</strong> {reason}</p>
+        </body>
+    </html>
+    """
+
+    # Create a MIMEMultipart message
+    msg = MIMEMultipart()
+    msg['From'] = sender
+    msg['To'] = ', '.join(receiver)
+    msg['Subject'] = f'Load Accepted {load["id"]} - Bid ${bid_amount}'
+
+    # Attach HTML content
+    msg.attach(MIMEText(email_html, 'html'))
+
+    with smtplib.SMTP(host='paulinc-com.mail.eo.outlook.com', port=25) as server:
+        server.ehlo()
+        server.starttls()
+        server.send_message(msg)
+
+    print(f'Successfully sent email to {receiver}')
+
 
 def send_login_failure_email(receiver, bot_name):
     sender = f'{bot_name}_bot@paulinc.com'
