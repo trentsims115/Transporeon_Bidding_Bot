@@ -391,7 +391,7 @@ def check_lane_restrictons(load, base_rate):
     lead_time_code = load.get('lead_time_code')
     accessorials = load.get('accessorials') or []
     load_equipment = load.get('equipment_type') or load.get('equipment') or ''
-    weight_lbs = load.get('weight') or load.get('weight_lbs')
+    weight_lbs = load.get('weight').replace("lb", "").replace(" ", "").replace(",", "").replace("LBS", "").replace("lbs", "")
     stops_count = len(load.get('stops')) or 2
     load['bid_mode'] = storage.config["bidding"]
 
