@@ -406,6 +406,7 @@ def bid_load(driver, load, rown, amount):
     import traceback
     from Utilities.utils import save_screenshot
     if storage.config["bidding"] == 0:
+        send_acception_email(['it-dev@paulinc.com', 'Mackayla.Dooley@paulinc.com'], "Transporeon", load)
         return False
     try:
         web_driver_wait_by_xpath(driver, 5, "//*[@id='placeOffer']").click()
