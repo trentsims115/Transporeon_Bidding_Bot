@@ -1,0 +1,12 @@
+{
+  "on": 1,
+  "bidding": 0,
+  "schedule": {
+    "enabled": true,
+    "timezone": "America/Chicago",
+    "days": ["Mon", "Tue", "Wed", "Thu", "Fri"],
+    "start": "07:00",
+    "end": "18:00"
+  },
+  "prometheus_port": 8000
+}
