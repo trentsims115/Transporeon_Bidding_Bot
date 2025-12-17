@@ -482,7 +482,7 @@ def check_lane_restrictons(load, base_rate):
         weight_ok = _weight_matches(
             restriction.get('min_weight_lbs'),
             restriction.get('max_weight_lbs'),
-            int(weight_lbs) if weight_lbs is not None else None
+            int(float(weight_lbs)) if weight_lbs is not None else None
         )
 
         if not (pickup_ok and delivery_ok and spec_pick_ok and spec_del_ok and lead_ok and acc_ok and equip_ok and weight_ok and distance_range_ok and lane_count_ok):
