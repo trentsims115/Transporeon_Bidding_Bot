@@ -429,7 +429,7 @@ def bid_load(driver, load, rown, amount):
         send_error_email(['it-dev@paulinc.com'], "Transporeon", error_message)
         print("Could not click on submit counteroffer")
     print('=============Bidding=============')
-    send_acception_email(['it-dev@paulinc.com'], "Transporeon", load)
+    send_acception_email(['it-dev@paulinc.com', 'Mackayla.Dooley@paulinc.com'], "Transporeon", load)
     storage.save_load_to_db(load)
     storage.load_data()
     return True
