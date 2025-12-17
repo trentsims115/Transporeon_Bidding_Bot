@@ -2,7 +2,7 @@
 from Utilities.utils import web_driver_wait_by_xpath, current_day_of_week, save_page_source, save_screenshot
 from Utilities.make_dat_call import make_dat_call
 from check_restriction import check_lane_restrictons
-from Utilities.email import send_linehaul_load_found_email
+from Utilities.email import send_linehaul_load_found_email, send_acception_email
 from Utilities.bot_functions import get_latest_network_call, navigate_to_bid_screen, refresh_page, get_total_loads, iteration_actions, get_load_information, handle_load_error, bid_load, reject_load, handle_evraz_condition
 from Utilities.logger_config import logger
 from Utilities.countdown import countdown
@@ -74,6 +74,7 @@ def _bot(driver):
             load['base_rate'] = base_rate
             if restrictions_check[0]:
                 if not storage.config["bidding"]:
+                    send_acception_email(['it-dev@paulinc.com', 'Mackayla.Dooley@paulinc.com'], "Transporeon", load)
                     storage.save_load_to_db(load)
                     storage.load_data()
                     print("Bot is in no bid mode")

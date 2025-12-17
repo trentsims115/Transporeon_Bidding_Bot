@@ -31,7 +31,7 @@ def send_acception_email(receiver, bot_name, load):
     msg = MIMEMultipart()
     msg['From'] = sender
     msg['To'] = ', '.join(receiver)
-    msg['Subject'] = f'Load Accepted {load["id"]} - Bid ${bid_amount}'
+    msg['Subject'] = f'Load Bid {load["id"]} - Bid ${bid_amount}'
 
     # Attach HTML content
     msg.attach(MIMEText(email_html, 'html'))
