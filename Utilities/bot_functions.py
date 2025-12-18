@@ -439,9 +439,6 @@ def bid_load(driver, load, rown, amount):
     if storage.config["bidding"] == 0:
         send_acception_email(['it-dev@paulinc.com', 'Mackayla.Dooley@paulinc.com'], "Transporeon", load)
         return False
-    if is_place_offer_disabled(driver):  # Check if the button is disabled before clicking it.
-        print("Place offer button is disabled. Skipping this load.")
-        return False  # Return False to indicate that the bid was not placed.
     try:
         web_driver_wait_by_xpath(driver, 5, "//*[@id='placeOffer']").click()
     except Exception as e:

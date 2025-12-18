@@ -3,7 +3,7 @@ from Utilities.utils import web_driver_wait_by_xpath, current_day_of_week, save_
 from Utilities.make_dat_call import make_dat_call
 from check_restriction import check_lane_restrictons
 from Utilities.email import send_linehaul_load_found_email, send_acception_email
-from Utilities.bot_functions import get_latest_network_call, navigate_to_bid_screen, refresh_page, get_total_loads, iteration_actions, get_load_information, handle_load_error, bid_load, reject_load, handle_evraz_condition
+from Utilities.bot_functions import get_latest_network_call, navigate_to_bid_screen, refresh_page, get_total_loads, iteration_actions, get_load_information, handle_load_error, bid_load, reject_load, handle_evraz_condition, is_place_offer_disabled
 from Utilities.logger_config import logger
 from Utilities.countdown import countdown
 from Utilities import storage
@@ -50,6 +50,9 @@ def _bot(driver):
         for j in range(total_number_load_results):
             load = {}
             load = get_load_information(driver, load_list_results, j)
+            if is_place_offer_disabled(driver):  # Check if the button is disabled before clicking it.
+                print("Place offer button is disabled. Skipping this load.")
+                continue
             if load == {}:
                 continue
             print(load)
