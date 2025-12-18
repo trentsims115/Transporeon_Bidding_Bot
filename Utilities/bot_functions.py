@@ -66,6 +66,37 @@ def should_run_now():
         return True
     return False
 
+
+def is_place_offer_disabled(driver):
+    """Return True if the 'Place Offer' button is disabled."""
+    from selenium.webdriver.common.by import By
+    from selenium.common.exceptions import NoSuchElementException
+
+    try:
+        element = driver.find_element(By.XPATH, '//*[@id="placeOffer"]')
+    except NoSuchElementException:
+        print("Place Offer button not found.")
+        return True  # treat missing as disabled
+
+    class_attr = element.get_attribute("class") or ""
+    disabled_attr = element.get_attribute("disabled")
+
+    # Condition 1: "disabled" attribute exists
+    if disabled_attr is not None:
+        return True
+
+    # Condition 2: Class contains disabled indicators
+    DISABLED_CLASSES = [
+        "disabled",
+        "toolbarButton_placeOffer-disabled",
+        "placeOffer-disabled"
+    ]
+
+    if any(c in class_attr for c in DISABLED_CLASSES):
+        return True
+
+    return False
+
 def get_latest_network_call(driver, target: str):
     import gzip
     import json
@@ -408,6 +439,9 @@ def bid_load(driver, load, rown, amount):
     if storage.config["bidding"] == 0:
         send_acception_email(['it-dev@paulinc.com', 'Mackayla.Dooley@paulinc.com'], "Transporeon", load)
         return False
+    if is_place_offer_disabled(driver):  # Check if the button is disabled before clicking it.
+        print("Place offer button is disabled. Skipping this load.")
+        return False  # Return False to indicate that the bid was not placed.
     try:
         web_driver_wait_by_xpath(driver, 5, "//*[@id='placeOffer']").click()
     except Exception as e:
