@@ -50,9 +50,9 @@ def _bot(driver):
         for j in range(total_number_load_results):
             load = {}
             load = get_load_information(driver, load_list_results, j)
-            if is_place_offer_disabled(driver):  # Check if the button is disabled before clicking it.
-                print("Place offer button is disabled. Skipping this load.")
-                continue
+            # if is_place_offer_disabled(driver):  # Check if the button is disabled before clicking it.
+            #     print("Place offer button is disabled. Skipping this load.")
+            #     continue
             if load == {}:
                 continue
             print(load)
