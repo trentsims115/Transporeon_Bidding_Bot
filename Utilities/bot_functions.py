@@ -361,8 +361,10 @@ def get_load_information(driver, load_list_results, rown):
     # Origin details
     load['origin_city'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[25]")
     load['origin_zip'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[24]")
-    print(load['origin_zip'])
-    load['origin_state'] = get_state(load['origin_zip'])
+    if load['origin_country'] == 'IT':
+        load['origin_state'] = ""
+    else:
+        load['origin_state'] = get_state(load['origin_zip'])
     load['origin_country'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[27]")
     load['origin_country'] = normalize_country(load['origin_country'])
     # Shipper
@@ -370,7 +372,10 @@ def get_load_information(driver, load_list_results, rown):
     # Destination details
     load['dest_city'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[33]")
     load['dest_zip'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[32]")
-    load['dest_state'] = get_state(load['dest_zip'])
+    if load['dest_country'] == 'IT':
+        load['dest_state'] = ""
+    else:
+        load['dest_state'] = get_state(load['dest_zip'])
     load['dest_country'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[35]")
     load['dest_country'] = normalize_country(load['dest_country'])
     # Other load fields
