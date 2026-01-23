@@ -82,7 +82,7 @@ def make_dat_call(load, time_frame="none"):
             _ORG_BEARER_TOKEN = 'Bearer ' + dat_token_org_data['accessToken']
         else: 
             return {'status':'failed', 'message':f'Error Ocurred in Retrieving Organisation token for DAT: {dat_token_org_resp.text}', 'error_code': dat_token_org_resp.status_code}
-
+        
         #Start the process for fetching the user token
         dat_token_user_url = 'https://identity.api.dat.com/access/v1/token/user'
         dat_token_user_req =  {'username': user_level_username}
