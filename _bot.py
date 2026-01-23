@@ -59,7 +59,7 @@ def _bot(driver):
             load_list_results.append(load)
             dat_data = make_dat_call(load)
             print(dat_data)
-            if dat_data['status'] == 'failed':
+            if not dat_data or dat_data['status'] == 'failed':
                 continue
             # dat_data_90_day = make_dat_call(load, "average")
             load['dat_response'] = dat_data['response']['rateResponses'][0]['response']
