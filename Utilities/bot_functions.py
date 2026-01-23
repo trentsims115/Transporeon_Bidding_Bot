@@ -361,6 +361,7 @@ def get_load_information(driver, load_list_results, rown):
     # Origin details
     load['origin_city'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[25]")
     load['origin_zip'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[24]")
+    print(load['origin_zip'])
     load['origin_state'] = get_state(load['origin_zip'])
     load['origin_country'] = wait_text_by_xpath(driver, 3, f"//*[@id='PublishedTransportListViewCarrierGrid']/div[2]/div/table/tbody[{row_index}]/tr/td[27]")
     load['origin_country'] = normalize_country(load['origin_country'])
